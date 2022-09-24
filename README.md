@@ -18,6 +18,8 @@ Simulations, control, implementation files of SCR.
     - run the script and begin generation (it may takes some time)
 
 ## setup real model 
+test are performed using "Matlab2020a". I suggest to use the same version.
+
 - install https://github.com/NMMI/qbadmin and https://github.com/NMMI/qbAPI in "scrConnect" folder
 - setup and install https://github.com/NMMI/qbmove-simulink in "scrConnect" folder
 
