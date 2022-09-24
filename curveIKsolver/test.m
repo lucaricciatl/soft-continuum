@@ -1,8 +1,6 @@
 clc
 clear 
 
-addpath("SCR/generic")
-
 hold on
 N1 = 10
 N2 = 10

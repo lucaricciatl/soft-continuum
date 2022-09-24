@@ -1,0 +1,65 @@
+material_name = 'soft'                  ; %[]
+N = 8                                   ; %[]                                    
+N = 1 + N                               ; %[]
+v = 0.5                                 ; %[]
+E = [1.2 * 8.25,1.2 * 8.25,1.2 * 8.25,1.2 * 8.25,1.2 * 8.25, 6.24,  6.24, 6.24, 6.24, 6.24] * 10^5              ; %[Pa]
+G = E / (2*(1+v) )                      ; %[Pa]
+density_v = 1380 * ones(1:N)              ; %[kg/m^3]
+density_s = 1007 * ones(1:N)              ; %[kg/m^3]
+Ls = 0.05                               ; %[m]
+Rs = 0.02                               ; %[m]
+As = pi * Rs^2                          ; %[m^2]
+Av = pi * Rs^2                          ; %[m^2]
+Lv = 0.004                              ; %[m]
+Rv = Rs                                 ; %[m]
+pt1= 12.5 *10^-3                           ; %[m]
+pt2= -12.5 *10^-3                    ; %[m]
+pt3= 12.5 *10^-3               ; %[m]
+pt4= -12.5 *10^-3           ; %[m]
+pt5= 7.5 *10^-3 ; %[m]
+mass = density_s(1) * Ls * Rs^2 * pi     ; %[kg]
+poiss = v * ones(1,N)                   ; %[]
+Ix = 136576 * (10^-3)^4     * ones(1,N)  ; %[m^4] from autodesk
+Iy = 136576 * (10^-3)^4      * ones(1,N) ; %[m^4] from autodesk
+Iz = 136576 * 2 * (10^-3)^4 * ones(1,N)  ; %[m^4] from autodesk
+Ls = Ls   * ones(1,N)                   ; %[m]  
+As = As   * ones(1,N)                   ; %[m^2]  
+Av = Av   * ones(1,N)                   ; %[m^2]
+Rs = Rs   * ones(1,N)                   ; %[m]
+Lv = Lv   * ones(1,N)                   ; %[m]
+Rv = Rv   * ones(1,N)                   ; %[m]
+step = pi/ 4                            ; %[rad]
+fg = (mass*9.81)                    ; %[N]
+col = [0.2,0.6,0.6]                     ; %[]
+
+for i = 1 : N
+        pos1 = [pt1;0;0]                ;
+        pos2 = [pt2;0;0]                ;
+        pos3 = [0;pt3;0]                ;
+        pos4 = [0;pt4;0]                ;
+        Rz = Tz(step*i);
+        pos5 = Rz(1:3,1:3) * [pt5;0;0]  ; 
+        t1 = tendon(pos1)               ;
+        t2 = tendon(pos2)               ;
+        t3 = tendon(pos3)               ;
+        t4 = tendon(pos4)               ;
+        t5 = tendon(pos5)               ;
+        t1.tension = 0              ; %[N]
+        t2.tension = 0                ; %[N]
+        t3.tension = 0                  ; %[N]
+        t4.tension = 0                  ; %[N]
+        t5.tension = 100            ; %[N]
+        tendons(i,:) = [t1,t2,t3,t4,t5] ; %[N]
+end
+
+for i = 1 : N
+    md_vert(i) = MaterialData('soft',E(i),G(i),density_v(i),poiss(i),col) ;
+    md_soft(i) = MaterialData('soft',E(i),G(i),density_s(i),poiss(i),col) ;
+    id_vert(i) = InertialData(Ix(i),Iy(i),Iz(i))                        ;
+    id_soft(i) = InertialData(Ix(i),Iy(i),Iz(i))                        ;
+    sd_vert(i) = ShapeData(Av(i),Lv(i),Rv(i))                           ;
+    sd_soft(i) = ShapeData(As(i),Ls(i),Rs(i))                           ;
+
+    P_bb(i) = PartProperties(md_vert(i),id_vert(i),sd_vert(i));
+    P_soft(i) = PartProperties(md_soft(i),id_soft(i),sd_soft(i));
+end
