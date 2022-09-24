@@ -44,3 +44,28 @@ test are performed using "Matlab2020a". I suggest to use the same version.
 - "scrConnect" is the implementtion of connection PC-robot using qb library
  
  - "stability" contains simbolic stability evaluation
+
+# mounting guide and info
+![alt text](imgs/view1.jpg)
+
+## motor block
+![alt text](imgs/mbview.jpg)
+
+- build the motors
+  - mount motors components 
+  - fix tendons on the pylley using splicing
+  - close motor
+- mount motors on the layers
+- mount qb on the layers
+- mount encoders 
+- pass the tendons through the appropriate holes
+- stack and fix the layers
+- pass the tendons inside the soft modules from the bottom to the top
+
+## tip
+![alt text](imgs/tipview.jpg)
+- mount the final vertebra on the tip of the robot
+- use pins to fix tendons 
+- attach tip enclosure and fix the imu on the top 
+
+
