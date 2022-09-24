@@ -23,6 +23,12 @@ test are performed using "Matlab2020a". I suggest to use the same version.
 - install https://github.com/NMMI/qbadmin and https://github.com/NMMI/qbAPI in "scrConnect" folder
 - setup and install https://github.com/NMMI/qbmove-simulink in "scrConnect" folder
 
+- attach the robot IMU and QB electronics 
+
+- setup ports parameters inside the model
+
+- launch simulink model "scrConnect/soft_control.slx"
+
 
 ## guide to files
 - "curveIKsolver" is the pcc inverse kinematic solver, "curveIKsolver/test.m" perform simulation of IK using "curveIKsolver.m" class
@@ -37,3 +43,4 @@ test are performed using "Matlab2020a". I suggest to use the same version.
 
 - "scrConnect" is the implementtion of connection PC-robot using qb library
  
+ - "stability" contains simbolic stability evaluation
