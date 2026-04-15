@@ -1,7 +1,3 @@
-<p align="center">
-<img src="http://people.unipi.it/static/istologia/cherubino_hi_res_.jpg" alt="MarineGEO circle logo" style="height: 500px; width:500px;"/>
-</p>
-
 # SCR
 Simulations, control, implementation files of SCR.
 
